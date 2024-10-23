@@ -1,20 +1,21 @@
 <script setup>
-import ButtonItem from '../components/ButtonItem.vue';
+import ButtonItem from '../components/ButtonItem.vue'
 </script>
 <template>
   <main>
     <div class="icon" aria-label="Pokédex icon">
-      <img src="../assets/ellipse.png" alt="background" class="background">
-      <img src="../assets/picachu.png" alt="imgPika" class="pika">
+      <img src="../assets/ellipse.png" alt="background" class="background" />
+      <img src="../assets/picachu.png" alt="imgPika" class="pika" />
     </div>
     <div class="text_content">
       <h1>Welcome to Pokédex</h1>
       <p>
-        The digital encyclopedia created by Professor Oak is an invaluable tool to Trainers in the Pokémon world.
+        The digital encyclopedia created by Professor Oak is an invaluable tool
+        to Trainers in the Pokémon world.
       </p>
     </div>
 
-    <RouterLink to="/pokemon">
+    <RouterLink to="/about">
       <ButtonItem msg="Get started" />
     </RouterLink>
   </main>
@@ -57,10 +58,8 @@ main {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  margin-bottom: 30px
+  margin-bottom: 30px;
 }
-
-
 
 .cta-button:hover {
   background-color: #ffb905;
