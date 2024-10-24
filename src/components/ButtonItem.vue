@@ -1,48 +1,66 @@
 <script setup>
+
 defineProps({
   msg: {
     type: String,
-    required: true
-  }
-})
+    required: true,
+  },
+  icon: {
+    type: Boolean,
+    default: false,
+  },
+});
 </script>
 
 <template>
-  <div class="button">
-    <p>{{ msg }}</p>
+  <div class="button" v-if="icon">
+    <!-- Mostrar solo si el icono está presente -->
+    <div class="btn-icon">
+      <slot name="button-icon" />
+    </div>
+    <!-- Mensaje del botón -->
+    <div class="button-msg">
+      <p>{{ msg }}</p>
+    </div>
+  </div>
+  <div class="button" v-else>
+    <div class="button-msg">
+      <p>{{ msg }}</p>
+    </div>
+
   </div>
 </template>
 
 <style scoped>
 .button {
-  width: 130px;
-  height: 45px;
-  background-color: #f22539;
-  border-radius: 60px;
-  color: white;
+  width: 150px;
+  height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 16px;
-  font-weight: bold;
+  background-color: #f22539;
+  border-radius: 30px;
+  padding: 10px 20px;
   cursor: pointer;
-  transition:
-    background-color 0.3s ease,
-    transform 0.3s ease;
+  transition: background-color 0.3s ease;
 }
 
-.button:hover {
-  background-color: #c71d31;
-  transform: scale(1.05);
-}
 
 .button:active {
-  background-color: #a31628;
-  transform: scale(0.98);
+  background-color: #C00E20;
 }
 
-.button p {
+.btn-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+}
+
+.button-msg p {
   margin: 0;
-  padding: 0;
+  font-size: 16px;
+  color: white;
+  font-weight: bold;
 }
 </style>

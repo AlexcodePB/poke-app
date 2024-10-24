@@ -1,8 +1,8 @@
 import './assets/main.css'
 
-import { createApp } from 'vue'
 import { createPinia } from 'pinia'
-import  ButtonItem  from './components/ButtonItem.vue'
+import { createApp } from 'vue'
+import ButtonItem from './components/ButtonItem.vue'
 
 import App from './App.vue'
 import router from './router'

@@ -1,5 +1,5 @@
 <script setup>
-import ButtonItem from '../components/ButtonItem.vue'
+import ButtonItem from '../components/ButtonItem.vue';
 </script>
 <template>
   <main>
@@ -29,6 +29,7 @@ main {
   align-items: center;
   height: 100vh;
   padding: 1rem;
+  ;
 }
 
 .icon {
@@ -42,37 +43,34 @@ main {
 .pika {
   position: absolute;
   top: 0;
-  left: -15px;
+  left: -16px;
   z-index: 1;
 }
 
 .pika {
   left: -63px;
-  top: -66px;
+  top: -67px;
   z-index: 2;
 }
 
 .text_content {
+  color: black;
   text-align: center;
   margin-top: 40px;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 2rem;
   margin-bottom: 30px;
 }
 
-.cta-button:hover {
-  background-color: #ffb905;
+.text_content h1 {
+  font-size: 24px;
+  font-weight: 700;
 }
 
-@media (min-width: 1024px) {
-  main {
-    flex-direction: row;
-    text-align: left;
-  }
-
-  .text_content {
-    margin-right: 2rem;
-  }
+.text_content p {
+  color: #5e5e5e;
+  font-size: 18px;
+  font-weight: 500;
 }
 </style>

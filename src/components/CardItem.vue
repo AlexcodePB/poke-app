@@ -1,16 +1,19 @@
 <script setup>
-import { defineProps } from 'vue'
 
-const props = defineProps({
+import { ref } from 'vue';
+
+const active = ref(false)
+
+defineProps({
   title: {
     type: String,
     required: true,
-  },
-  subtitle: {
-    type: String,
-    default: '',
   }
 })
+const toggle = () => {
+  active.value = !active.value
+}
+
 </script>
 
 <template>
@@ -18,29 +21,42 @@ const props = defineProps({
     <div class="card-header">
       <h3>{{ title }}</h3>
     </div>
+    <div class="card-icon" @click="toggle">
+      <div v-if="active">
+        <img src="../assets/StarActive.png" alt="star" />
+      </div>
+      <div v-else>
+        <img src="../assets/StarInactive.png" alt="star" />
+      </div>
+    </div>
   </div>
 </template>
 
 <style scoped>
 .card {
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  padding: 16px;
-  max-width: 300px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.3s ease;
-}
-
-.card:hover {
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-}
-
-.card-header {
-  margin-bottom: 12px;
+  background: #ffffff;
+  border: none;
+  border-radius: 5px;
+  padding: 2px auto;
+  width: 315px;
+  height: 60px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: .5rem .5rem .5rem 1.5rem;
 }
 
 .card h3 {
-  font-size: 1.5rem;
+  font-size: 22px;
+  font-weight: 500;
+  color: black;
+  text-transform: capitalize;
   margin: 0;
+}
+
+.card-icon {
+  width: 50px;
+  height: 100%;
 }
 </style>
