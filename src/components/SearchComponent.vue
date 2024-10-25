@@ -2,25 +2,25 @@
 import { ref } from 'vue';
 import { usePokemonStore } from '../stores/pokemonStore';
 
-const inputValue = ref('');
-const isFocused = ref(false);
-const pokemonStore = usePokemonStore(); // Cambié el nombre a pokemonStore para evitar confusión
+const inputValue = ref('')
+const isFocused = ref(false)
+const pokemonStore = usePokemonStore()
 
 function handleFocus() {
-    isFocused.value = true;
+    isFocused.value = true
 }
 
 function handleBlur() {
     if (inputValue.value === '') {
-        isFocused.value = false;
+        isFocused.value = false
     }
 }
 
-// Función para manejar el evento de presionar Enter
+
 function handleKeyUp(event) {
     if (event.key === 'Enter') {
-        pokemonStore.fetchPokemonDetails(inputValue.value); // Llama a la función con el valor del input
-        inputValue.value = ''; // Opcional: limpia el input después de buscar
+        pokemonStore.fetchPokemonDetails(inputValue.value)
+        inputValue.value = ''
     }
 }
 </script>
@@ -39,10 +39,10 @@ function handleKeyUp(event) {
     height: 50px;
     display: flex;
     align-items: center;
-    gap: .5rem;
+    gap: 0.5rem;
     padding: 1rem;
     border-radius: 5px;
-    background-color: #FFFFFF;
+    background-color: #ffffff;
 }
 
 img {
@@ -57,7 +57,7 @@ input {
     height: 100%;
     font-size: 16px;
     color: #000;
-    background-color: #FFFFFF;
+    background-color: #ffffff;
 }
 
 input::placeholder {

@@ -1,25 +1,27 @@
 <script setup>
-
-import { ref } from 'vue';
+import { ref } from 'vue'
+import { usePokemonStore } from '../stores/pokemonStore'
 
 const active = ref(false)
+const store = usePokemonStore()
 
-defineProps({
+const props = defineProps({
   title: {
     type: String,
-    required: true,
+    required: true
   }
 })
+
 const toggle = () => {
   active.value = !active.value
+  store.toggleActivePokemon(props.title)
 }
-
 </script>
 
 <template>
   <div class="card">
     <div class="card-header">
-      <h3>{{ title }}</h3>
+      <h3>{{ props.title }}</h3>
     </div>
     <div class="card-icon" @click="toggle">
       <div v-if="active">
@@ -37,14 +39,13 @@ const toggle = () => {
   background: #ffffff;
   border: none;
   border-radius: 5px;
-  padding: 2px auto;
   width: 315px;
   height: 60px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: .5rem .5rem .5rem 1.5rem;
+  padding: 0.5rem 0.5rem 0.5rem 1.5rem;
 }
 
 .card h3 {

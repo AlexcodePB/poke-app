@@ -1,5 +1,5 @@
 <script setup>
-import ButtonItem from '../components/ButtonItem.vue';
+import ButtonItem from '../components/ButtonItem.vue'
 </script>
 <template>
   <main>
@@ -29,7 +29,6 @@ main {
   align-items: center;
   height: 100vh;
   padding: 1rem;
-  ;
 }
 
 .icon {

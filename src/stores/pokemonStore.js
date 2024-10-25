@@ -6,18 +6,16 @@ export const usePokemonStore = defineStore('pokemon', {
     pokemonDetails: {},
     loadingList: false,
     loadingDetails: false,
-    error: null
+    error: null,
+    activePokemons: []
   }),
 
   actions: {
-    // Fetch para obtener la lista de pokémons
     async fetchPokemonList() {
       this.loadingList = true
-      this.error = null // Limpia el error antes de una nueva petición
+      this.error = null
       try {
-        const response = await fetch(
-          'https://pokeapi.co/api/v2/pokemon?limit=10'
-        )
+        const response = await fetch('https://pokeapi.co/api/v2/pokemon')
         const data = await response.json()
         this.pokemonList = data.results
       } catch (error) {
@@ -28,9 +26,7 @@ export const usePokemonStore = defineStore('pokemon', {
       }
     },
 
-    // Fetch para obtener los detalles de un pokémon específico
     async fetchPokemonDetails(name) {
-      // Revisa si ya tienes los detalles en cache
       if (this.pokemonDetails[name]) {
         return
       }
@@ -48,6 +44,14 @@ export const usePokemonStore = defineStore('pokemon', {
         console.error(error)
       } finally {
         this.loadingDetails = false
+      }
+    },
+    toggleActivePokemon(name) {
+      const index = this.activePokemons.indexOf(name)
+      if (index === -1) {
+        this.activePokemons.push(name)
+      } else {
+        this.activePokemons.splice(index, 1)
       }
     }
   }
