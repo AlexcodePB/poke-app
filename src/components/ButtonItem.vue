@@ -1,5 +1,5 @@
 <script setup>
-import { defineEmits, defineProps } from 'vue'
+import { defineEmits, defineProps } from 'vue';
 
 const props = defineProps({
   msg: {
@@ -24,10 +24,7 @@ const emitClick = () => {
 </script>
 
 <template>
-  <div
-    :class="['button', { active: props.isActive, inactive: !props.isActive }]"
-    @click="emitClick"
-  >
+  <div :class="['button', { active: props.isActive, inactive: !props.isActive }]" @click="emitClick">
     <div v-if="props.icon" class="btn-icon">
       <slot name="button-icon" />
     </div>
@@ -39,7 +36,8 @@ const emitClick = () => {
 
 <style scoped>
 .button {
-  width: 150px;
+  min-width: 150px;
+  max-width: 195px;
   height: 44px;
   display: flex;
   align-items: center;

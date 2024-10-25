@@ -46,6 +46,7 @@ export const usePokemonStore = defineStore('pokemon', {
         this.loadingDetails = false
       }
     },
+
     toggleActivePokemon(name) {
       const index = this.activePokemons.indexOf(name)
       if (index === -1) {

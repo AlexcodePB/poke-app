@@ -1,30 +1,46 @@
 <script setup>
-import ButtomBar from '@/components/ButtomBar.vue'
-import CardItem from '@/components/CardItem.vue'
-import SearchComponent from '@/components/SearchComponent.vue'
-import { computed, onMounted, ref } from 'vue'
-import { usePokemonStore } from '../stores/pokemonStore'
+import ButtomBar from '@/components/ButtomBar.vue';
+import CardDetails from '@/components/CardDetails.vue';
+import CardItem from '@/components/CardItem.vue';
+import SearchComponent from '@/components/SearchComponent.vue';
+import { computed, onMounted, ref } from 'vue';
+import { usePokemonStore } from '../stores/pokemonStore';
 
-const pokemonStore = usePokemonStore()
-const isLoading = ref(true)
-const showFavorites = ref(false)
+const pokemonStore = usePokemonStore();
+const isLoading = ref(true);
+const showFavorites = ref(false);
+const selectedPokemon = ref(null); // Aquí almacenaremos el Pokémon seleccionado
+const showPopup = ref(false); // Controlar la visibilidad del popup
 
 onMounted(async () => {
-  await pokemonStore.fetchPokemonList()
+  await pokemonStore.fetchPokemonList();
   setTimeout(() => {
-    isLoading.value = false
-  }, 3000)
-})
+    isLoading.value = false;
+  }, 3000);
+});
+
 const displayedPokemonList = computed(() => {
   return showFavorites.value
     ? pokemonStore.activePokemons.map(name =>
-        pokemonStore.pokemonList.find(pokemon => pokemon.name === name)
-      )
-    : pokemonStore.pokemonList
-})
+      pokemonStore.pokemonList.find(pokemon => pokemon.name === name)
+    )
+    : pokemonStore.pokemonList;
+});
+
 function setActiveButton(button) {
-  showFavorites.value = button === 'Favorites'
+  showFavorites.value = button === 'Favorites';
 }
+
+// Función que se llamará cuando se seleccione un Pokémon
+const handlePokemonSelected = (pokemonDetails) => {
+  selectedPokemon.value = pokemonDetails;
+  showPopup.value = true;
+};
+
+// Función para cerrar el popup
+const closePopup = () => {
+  showPopup.value = false;
+};
 </script>
 
 <template>
@@ -37,13 +53,13 @@ function setActiveButton(button) {
       <SearchComponent />
     </div>
     <div class="container-cards">
-      <CardItem
-        v-for="item in displayedPokemonList"
-        :key="item.name"
-        :title="item.name"
-      />
+      <CardItem v-for="item in displayedPokemonList" :key="item.name" :title="item.name"
+        @pokemon-selected="handlePokemonSelected" />
     </div>
     <ButtomBar @set-active="setActiveButton" />
+
+    <!-- Componente CardDetails (popup) -->
+    <CardDetails v-if="selectedPokemon" :pokemonDetails="selectedPokemon" :show="showPopup" @close-popup="closePopup" />
   </div>
 </template>
 
@@ -88,7 +104,7 @@ function setActiveButton(button) {
 .container-cards {
   margin-top: 2rem;
   display: grid;
-  grid-template-columns: repeat(auto-filzl, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 0.5rem;
 }
 
