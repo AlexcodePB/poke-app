@@ -25,8 +25,23 @@ const toggle = () => {
     store.toggleActivePokemon(props.title);
 }
 const addToFavorites = () => {
-    isFavorite() ? store.removeActivePokemon(props.title) : store.toggleActivePokemon(props.title);
+    if (isFavorite()) {
+        store.removeActivePokemon(props.title);
+    } else {
+        store.toggleActivePokemon(props.title);
+
+        const data = `${props.pokemonDetails.name}, ${props.pokemonDetails.height}, ${props.pokemonDetails.weight}, ${props.pokemonDetails.type}`;
+        // Copiar el nombre del Pokémon al portapapeles
+        navigator.clipboard.writeText(data)
+            .then(() => {
+                console.log(`${props.pokemonDetails.name} copiado al portapapeles`);
+            })
+            .catch(err => {
+                console.error("Error al copiar al portapapeles: ", err);
+            });
+    }
 }
+
 const isFavorite = () => {
     return store.activePokemons.includes(props.title);
 }
