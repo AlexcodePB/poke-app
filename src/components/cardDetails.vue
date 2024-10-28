@@ -24,6 +24,12 @@ const toggle = () => {
     active.value = !active.value;
     store.toggleActivePokemon(props.title);
 }
+const addToFavorites = () => {
+    isFavorite() ? store.removeActivePokemon(props.title) : store.toggleActivePokemon(props.title);
+}
+const isFavorite = () => {
+    return store.activePokemons.includes(props.title);
+}
 </script>
 
 <template>
@@ -43,9 +49,9 @@ const toggle = () => {
             <div class="pokemon-details">
                 <p><strong>Name:</strong> {{ pokemonDetails.name }}</p>
                 <hr>
-                <p><strong>Height:</strong> {{ pokemonDetails.height }}</p>
-                <hr>
                 <p><strong>Weight:</strong> {{ pokemonDetails.weight }}</p>
+                <hr>
+                <p><strong>Height:</strong> {{ pokemonDetails.height }}</p>
                 <hr>
                 <p><strong>Type:</strong> {{ pokemonDetails.type }}</p>
                 <hr>

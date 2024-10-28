@@ -6,6 +6,7 @@ const inputValue = ref('')
 const isFocused = ref(false)
 const pokemonStore = usePokemonStore()
 
+
 function handleFocus() {
     isFocused.value = true
 }
@@ -19,8 +20,10 @@ function handleBlur() {
 
 function handleKeyUp(event) {
     if (event.key === 'Enter') {
-        pokemonStore.fetchPokemonDetails(inputValue.value)
-        inputValue.value = ''
+        pokemonStore.pokemonList = pokemonStore.pokemonList.filter(pokemon => pokemon.name.includes(inputValue.value))
+        if (inputValue.value === '') {
+            pokemonStore.fetchPokemonList()
+        }
     }
 }
 </script>

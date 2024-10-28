@@ -22,10 +22,10 @@ const handleCardClick = async () => {
       name: details.name,
       height: details.height,
       weight: details.weight,
-      type: details.types[0]?.type?.name 
+      type: details.types.map(type => type.type.name).join(', ')
     }
 
-    console.log(pokemonDetails); 
+    console.log(pokemonDetails);
     emit('pokemon-selected', pokemonDetails);
   } else {
     console.error(`Detalles de ${props.title} no disponibles`);
@@ -36,6 +36,7 @@ const toggle = () => {
   active.value = !active.value;
   store.toggleActivePokemon(props.title);
 }
+
 </script>
 
 <template>

@@ -1,6 +1,6 @@
 <script setup>
 import ButtomBar from '@/components/ButtomBar.vue';
-import CardDetails from '@/components/CardDetails.vue';
+import CardDetails from '@/components/cardDetails.vue';
 import CardItem from '@/components/CardItem.vue';
 import SearchComponent from '@/components/SearchComponent.vue';
 import { computed, onMounted, ref } from 'vue';
@@ -11,6 +11,7 @@ const isLoading = ref(true);
 const showFavorites = ref(false);
 const selectedPokemon = ref(null); // Aquí almacenaremos el Pokémon seleccionado
 const showPopup = ref(false); // Controlar la visibilidad del popup
+const notfound = ref(false)
 
 onMounted(async () => {
   await pokemonStore.fetchPokemonList();
@@ -41,6 +42,11 @@ const handlePokemonSelected = (pokemonDetails) => {
 const closePopup = () => {
   showPopup.value = false;
 };
+
+if (pokemonStore.pokemonList.length === 0) {
+  notfound.value = true
+}
+
 </script>
 
 <template>
@@ -52,7 +58,10 @@ const closePopup = () => {
     <div class="filtro">
       <SearchComponent />
     </div>
-    <div class="container-cards">
+    <div v-if="!notfound">
+      <h1 style="color: black;">No se encontraron resultados</h1>
+    </div>
+    <div class="container-cards" v-else>
       <CardItem v-for="item in displayedPokemonList" :key="item.name" :title="item.name"
         @pokemon-selected="handlePokemonSelected" />
     </div>
