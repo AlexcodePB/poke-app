@@ -90,6 +90,8 @@ const toggle = () => {
     text-align: center;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
     align-items: start;
 }
 
@@ -142,9 +144,12 @@ const toggle = () => {
 }
 
 .pokemon-buttons {
+    width: 100%;
     display: flex;
-    align-items: center;
-    justify-self: center;
-    gap: 10px;
+    flex-direction: row;
+    align-self: center;
+    justify-content: center;
+    gap: 25px;
+    margin-bottom: 10px;
 }
 </style>
